@@ -12,6 +12,8 @@ export default async function SetupLayout({children}: Props) {
     const {userId} = auth()
     if (!userId) redirect('/sign-in')
 
+    const billboard = prismadb.billboard
+
     const store = await prismadb.store.findFirst({
         where: {userId}
     })

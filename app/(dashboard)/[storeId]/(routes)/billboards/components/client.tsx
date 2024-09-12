@@ -6,9 +6,15 @@ import {Plus} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import {useParams, useRouter} from "next/navigation";
 import {Billboard} from "@prisma/client";
+import {DataTable} from "@/components/ui/data-table";
+import {
+    BillboardColumn,
+    columns
+} from "@/app/(dashboard)/[storeId]/(routes)/billboards/components/columns";
+import ApiList from "@/components/ui/api-list";
 
 interface Props {
-    data: Billboard[];
+    data: BillboardColumn[];
 }
 
 export default function BillboardClient({data}: Props) {
@@ -25,7 +31,10 @@ export default function BillboardClient({data}: Props) {
                 </Button>
             </div>
             <Separator/>
-
+            <DataTable columns={columns} data={data} searchKey={'label'}/>
+            <Heading title={'API'} description={'API calls for dashboards'}/>
+            <Separator/>
+            <ApiList entityName={'Billboards'} entityIdName={'billboardId'}/>
         </>
     );
 }

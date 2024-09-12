@@ -15,7 +15,6 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import {useParams, useRouter} from "next/navigation";
 import AlertModal from "@/components/modals/alert-modal";
-import {useOrigin} from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-upload";
 
 
@@ -69,8 +68,9 @@ export default function BillboardForm({initialData}: Props) {
     const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/billboard/${params.billboardId}`)
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             toast.success('Billboard deleted')
+            router.push(`/${params.storeId}/billboards`)
             router.refresh()
         } catch (error) {
             toast.error('Make sure all categories are removed using this billboard first.')
